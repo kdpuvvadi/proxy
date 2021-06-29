@@ -37,3 +37,14 @@
   service:
     name: docker
     state: started
+
+- name: Create group '{{docker_group}}'
+  group:
+    name: "{{docker_group}}"
+    state: present
+
+- name: adding existing user '{{ user }}' to group sudo
+  user:
+    name: '{{ansible_user}}'
+    groups: "{{docker_group}}"
+    append: yes
