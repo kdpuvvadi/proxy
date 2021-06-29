@@ -1,11 +1,11 @@
 ---
-- name: Create group
+- name: Create group '{{group}}'
   group:
     name: "{{group}}"
     state: present
 
 - name: adding existing user '{{ user }}' to group sudo
   user:
-    name: '{{user}}'
+    name: '{{ansible_user}}'
     groups: "{{group}}"
     append: yes

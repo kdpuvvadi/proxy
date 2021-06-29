@@ -16,3 +16,6 @@
   tasks:
     - name: Setup Docker.
       ansible.builtin.import_tasks: tasks/docker.yml
+
+    - name: Docker group.
+      ansible.builtin.import_tasks: tasks/docker_group.yml
