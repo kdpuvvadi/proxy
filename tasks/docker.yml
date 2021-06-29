@@ -49,3 +49,5 @@
     name: '{{ansible_user}}'
     groups: docker
     append: yes
+- name: Reset connection
+  meta: reset_connection
