@@ -4,17 +4,41 @@
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
+  when:
+    - ansible_facts.os_family == "Debian"
 
-- name: Add Docker PPA
+- name: Add Docker PPA for Debian
   apt_repository:
     repo: deb https://download.docker.com/linux/ubuntu bionic stable
     state: present
+  when:
+    - ansible_facts.os_family == "Debian"
 
-- name: Install Docker-ce
+- name: Add docker ppa for redhat family
+  yum_repository:
+    name: docker-ce-stable
+    description: Docker CE Stable Repo
+    baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+  when:
+        - ansible_facts.os_family == "RedHat"
+  
+
+- name: Install Docker-ce debian
   apt:
     name: docker-ce
     update_cache: yes
     state: latest
+  when:
+    - ansible_facts.os_family == "Debian"
+
+- name: Install docker on redhat
+  yum:
+    name: 
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+  when:
+        - ansible_facts.os_family == "RedHat"
 
 - name: Start docker
   service:
