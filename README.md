@@ -1,6 +1,6 @@
 ## Deploy Nginx Proxy Manager with Ansible Playbook
 
-You need atleast 2.9 or heighr version of ansible. 
+You need atleast 2.9 or higher version of ansible. 
 ### Install Ansible
 
 `pip install ansible` 
