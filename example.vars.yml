@@ -1,0 +1,17 @@
+---
+config_dir: '~'
+
+# Docker group
+docker_group: docker
+ansible_user: kd 
+
+# proxy vars
+network: proxy
+mysql_root_password: npm
+mysql_database: npm
+mysql_user: npm
+mysql_password: npm
+mysql_host: mysql
+
+# portainer
+portainer_enable: false
