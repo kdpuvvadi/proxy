@@ -1,29 +1,27 @@
 ## Deploy Nginx Proxy Manager with Ansible Playbook
 
 You need atleast 2.9 or higher version of ansible. 
-### Install Ansible
+### Setup
 
-`pip install ansible` 
+1. Install pip `sudo apt install python3-pip -y`
+2. install ansible with pip `pip install ansible` 
+3. Install docker sdk for ansible `pip install docker`
+4. Install requirements `ansible-galaxy collection install -r requirements.yml`
 
-### Install Docker SDK for Ansible
+### Run
 
-`pip install docker`
-
-### Install Docker community edition with ansible galaxy
-
-`ansible-galaxy collection install -r requirements.yml`
-
-### Download the Playbooks
-
-Clone the repo with `git clone https://github.com/kdpuvvadi/Nginx-Proxymanager-Ansible.git nginx-proxy`. Edit the vars file desired values and change the host ip & host ssh username.
+1. Clone the repo  `git clone https://github.com/kdpuvvadi/Nginx-Proxy-Manager-Ansible.git proxy`. 
+2. copy `example.inventory.ini` to `inventory.ini`.
+3. Change host ip of the host.
+4. copy `example.vars.yml` to `vars.yml`.
+5. Change the variable based on your preferences.
 
 ### Run the playbook
 
- * `ansible-playbook main.yml` ( installs docker and deploys proxy manager. append `-K` for sudo password prompt if necessary).
- 
- 
+Run `ansible-playbook main.yml` 
 
 ### Login Details
+
 ```
 Email:    admin@example.com
 Password: changeme
