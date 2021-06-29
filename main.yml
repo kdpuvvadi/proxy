@@ -1,0 +1,14 @@
+---
+- hosts: deb
+  become: true
+
+  pre_tasks:
+    - name: Config
+      ansible.builtin.include_vars: config.yml
+
+    - name: apt cache update & Upgrade
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+      when:
+        - ansible_facts.os_family == "Debian"
