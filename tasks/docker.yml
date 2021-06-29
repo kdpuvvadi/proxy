@@ -1,0 +1,39 @@
+---
+
+- name: Install packages/prerequisites
+  apt:
+    name:
+    - curl
+    - python3-pip
+    - apt-transport-https
+    - ca-certificates
+    - software-properties-common
+    - virtualenv
+    - python3-setuptools
+    state: latest
+    cache_valid_time: 3600
+  
+- name: install python docker SDK
+  pip:
+    name: docker
+
+- name: Install Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker PPA
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
+- name: Install Docker-ce
+  apt:
+    name: docker-ce
+    update_cache: yes
+    state: latest
+
+- name: Start docker
+  service:
+    name: docker
+    state: started
