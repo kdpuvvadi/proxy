@@ -14,6 +14,20 @@
       when:
         - ansible_facts.os_family == "Debian"
 
+    - name: update dnf cache for redhatfamily
+      dnf:
+        update_cache: true
+        cache_valid_time: 3600
+      when:
+        - ansible_facts.os_family == "RedHat"
+
+    - name: upgrade all redhat
+      dnf: 
+        name: "*"
+        state: latest
+      when:
+        - ansible_facts.os_family == "RedHat"
+
   tasks:
 
     - name: Install packages/prerequisites
