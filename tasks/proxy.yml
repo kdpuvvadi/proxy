@@ -19,6 +19,8 @@
     restart_policy: always
     networks:
       - name: "{{network}}"
+    container_default_behavior: compatibility
+    network_mode: "{{network}}"
     
 
 - name: Nginx Proxy Manager deploy
@@ -33,7 +35,7 @@
       - "/data:/data"
       - "/letsencrypt:/etc/letsencrypt"
     env: 
-      DB_MYSQL_HOST: "mysql_host"
+      DB_MYSQL_HOST: "{{mysql_host}}"
       DB_MYSQL_PORT: "3306"
       DB_MYSQL_USER: "{{mysql_user}}"
       DB_MYSQL_PASSWORD: "{{mysql_password}}"
@@ -41,3 +43,4 @@
     restart_policy: always
     networks:
       - name: "{{network}}"
+    network_mode: "{{network}}"
