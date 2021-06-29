@@ -19,7 +19,7 @@ Clone the repo with `git clone https://github.com/kdpuvvadi/Nginx-Proxymanager-A
 
 ### Run the playbook
 
- * `ansible-playbook main.yml` ( installs docker, append `-K` for sudo password prompt if necessary).
+ * `ansible-playbook main.yml` ( installs docker and deploys proxy manager. append `-K` for sudo password prompt if necessary).
  
  
 
