@@ -19,3 +19,7 @@
 
     - name: Install Nginx Proxy Manager
       import_tasks: tasks/proxy.yml
+    
+    - name: install portainer
+      import_tasks: tasks/portainer.yml
+      when: portainer_enable
