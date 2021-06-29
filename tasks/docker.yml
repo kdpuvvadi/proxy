@@ -37,6 +37,7 @@
   service:
     name: docker
     state: started
+    enabled: true
 
 - name: Create group '{{docker_group}}'
   group:
