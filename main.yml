@@ -15,14 +15,14 @@
         - ansible_facts.os_family == "Debian"
 
     - name: update dnf cache for redhatfamily
-      dnf:
+      yum:
         update_cache: true
         cache_valid_time: 3600
       when:
         - ansible_facts.os_family == "RedHat"
 
     - name: upgrade all redhat
-      dnf: 
+      yum: 
         name: "*"
         state: latest
       when:
