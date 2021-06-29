@@ -4,10 +4,10 @@
 
   pre_tasks:
     - name: Config
-      ansible.builtin.include_vars: config.yml
+      include_vars: config.yml
 
     - name: apt cache update & Upgrade
-      ansible.builtin.apt:
+      apt:
         update_cache: true
         cache_valid_time: 3600
       when:
@@ -15,7 +15,7 @@
 
   tasks:
     - name: Setup Docker.
-      ansible.builtin.import_tasks: tasks/docker.yml
+      import_tasks: tasks/docker.yml
 
     - name: Docker group.
-      ansible.builtin.import_tasks: tasks/docker_group.yml
+      import_tasks: tasks/docker_group.yml
