@@ -3,7 +3,7 @@ config_dir: '~'
 
 # Docker group
 docker_group: docker
-ansible_user: kd 
+ansible_user: ansible 
 
 # proxy vars
 network: proxy
