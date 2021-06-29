@@ -31,6 +31,12 @@
   when:
     - ansible_facts.os_family == "Debian"
 
+- name: update yum cache for redhat family after docker ppa
+  yum:
+    update_cache: true
+  when:
+    - ansible_facts.os_family == "RedHat"
+
 - name: Install docker on redhat
   yum:
     name: 

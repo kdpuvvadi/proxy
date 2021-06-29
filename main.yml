@@ -1,5 +1,5 @@
 ---
-- hosts: deb
+- hosts: all
   become: true
 
   pre_tasks:
@@ -14,10 +14,9 @@
       when:
         - ansible_facts.os_family == "Debian"
 
-    - name: update dnf cache for redhatfamily
+    - name: update yum cache for redhatfamily
       yum:
         update_cache: true
-        cache_valid_time: 3600
       when:
         - ansible_facts.os_family == "RedHat"
 
