@@ -4,7 +4,7 @@
 
   pre_tasks:
     - name: Config
-      include_vars: config.yml
+      include_vars: vars.yml
 
     - name: apt cache update & Upgrade
       apt:
