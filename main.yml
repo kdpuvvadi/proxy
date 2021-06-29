@@ -17,5 +17,5 @@
     - name: Setup Docker.
       import_tasks: tasks/docker.yml
 
-    - name: Docker group.
-      import_tasks: tasks/docker_group.yml
+    - name: Install Nginx Proxy Manager
+      import_tasks: tasks/proxy.yml
