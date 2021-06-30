@@ -2,8 +2,10 @@
 
 [![lint](https://github.com/kdpuvvadi/Nginx-Proxy-Manager-Ansible/actions/workflows/lint.yml/badge.svg)](https://github.com/kdpuvvadi/Nginx-Proxy-Manager-Ansible/actions/workflows/lint.yml)
 
+Playbook works on both Debian & Red Hat family hosts. Using Ubuntu 20.04 pc as control node. 
 
 You need atleast 2.9 or higher version of ansible. 
+
 ### Setup
 
 1. Install pip `sudo apt install python3-pip -y`
