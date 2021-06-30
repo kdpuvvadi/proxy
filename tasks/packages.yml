@@ -12,7 +12,7 @@
     - python3-setuptools
     state: present
     cache_valid_time: 3600
-    when: ansible_facts.os_family == "Debian"
+  when: ansible_facts.os_family == "Debian"
 
 - name: Install packages on redhatfamily
   yum:
