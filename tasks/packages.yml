@@ -10,10 +10,9 @@
     - software-properties-common
     - virtualenv
     - python3-setuptools
-    state: latest
+    state: present
     cache_valid_time: 3600
-  when: 
-    - ansible_facts.os_family == "Debian"
+    when: ansible_facts.os_family == "Debian"
 
 - name: Install packages on redhatfamily
   yum:
@@ -29,9 +28,8 @@
     - device-mapper-event 
     - device-mapper-libs 
     - device-mapper-event-libs
-    state: latest
-  when:
-    - ansible_facts.os_family == "RedHat"
+    state: present
+  when: ansible_facts.os_family == "RedHat"
 
 - name: install python docker SDK
   pip:

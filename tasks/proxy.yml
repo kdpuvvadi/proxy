@@ -21,7 +21,7 @@
       - name: "{{ network }}"
     container_default_behavior: compatibility
     network_mode: "{{ network }}"
-    
+
 
 - name: Nginx Proxy Manager deploy
   community.docker.docker_container:
