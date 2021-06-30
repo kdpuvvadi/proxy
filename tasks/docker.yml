@@ -5,20 +5,20 @@
   failed_when: false
   changed_when: false
   check_mode: false
-  register: docker_result
+  register: docker_present
 
 - name: Download Docker install script.
   get_url:
     url: https://get.docker.com/
     dest: /tmp/get-docker.sh
     mode: 0775
-  when: docker_result.rc == 1
+  when: docker_present.rc == 1
 
 - name: Run Docker install script.
   command: /tmp/get-docker.sh
   environment:
     CHANNEL: stable
-  when: docker_result.rc == 1
+  when: docker_present.rc == 1
 
 - name: Start docker
   service:
