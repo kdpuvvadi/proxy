@@ -1,22 +1,14 @@
-name: Ansible Lint  # feel free to pick your own name
+name: Ansible Lint
 
 on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    name: ansible-lint
     steps:
-    # Important: This sets up your GITHUB_WORKSPACE environment variable
-    - uses: actions/checkout@v2
-
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@master
-      with:
-        
-        targets: "main.yml"
-        override-deps: |
-          ansible==2.9
-          ansible-lint==4.2.0
-        
+      - uses: actions/checkout@master
+      - uses: actions/setup-python@v2
+      - run: pip install ansible ansible-lint
+      - run: ansible-lint --version
+      - run: ansible-lint .
