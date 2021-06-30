@@ -12,3 +12,4 @@ jobs:
       - run: pip install ansible ansible-lint
       - run: ansible-lint --version
       - run: ansible-lint .
+    warn_list: package-latest
