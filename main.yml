@@ -14,16 +14,11 @@
       when:
         - ansible_facts.os_family == "Debian"
 
-    - name: update yum cache for redhatfamily
-      yum:
-        update_cache: true
-      when:
-        - ansible_facts.os_family == "RedHat"
-
-    - name: upgrade all redhat
+    - name: yum cache update & upgrade
       yum: 
         name: "*"
         state: latest
+        update_cache: true
       when:
         - ansible_facts.os_family == "RedHat"
 
