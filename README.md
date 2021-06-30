@@ -1,6 +1,6 @@
 ## Deploy Nginx Proxy Manager with Ansible Playbook
 
-[![lint](https://github.com/kdpuvvadi/Nginx-Proxy-Manager-Ansible/actions/workflows/lint.yml/badge.svg)](https://github.com/kdpuvvadi/Nginx-Proxy-Manager-Ansible/actions/workflows/lint.yml)
+[![lint](https://github.com/kdpuvvadi/Nginx-Proxy-Manager-Ansible/actions/workflows/lint.yml/badge.svg?event=push)](https://github.com/kdpuvvadi/Nginx-Proxy-Manager-Ansible/actions/workflows/lint.yml)
 
 Playbook works on both Debian & Red Hat family hosts. Using Ubuntu 20.04 pc as control node. 
 
