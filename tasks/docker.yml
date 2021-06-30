@@ -1,21 +1,21 @@
 ---
 
 - name: if Docker is already installed?.
-  ansible.builtin.command: which docker
+  command: which docker
   failed_when: false
   changed_when: false
   check_mode: false
   register: docker_result
 
 - name: Download Docker install script.
-  ansible.builtin.get_url:
+  get_url:
     url: https://get.docker.com/
     dest: /tmp/get-docker.sh
     mode: 0775
   when: docker_result.rc == 1
 
 - name: Run Docker install script.
-  ansible.builtin.command: /tmp/get-docker.sh
+  command: /tmp/get-docker.sh
   environment:
     CHANNEL: stable
   when: docker_result.rc == 1
