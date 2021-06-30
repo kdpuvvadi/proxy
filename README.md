@@ -1,5 +1,8 @@
 ## Deploy Nginx Proxy Manager with Ansible Playbook
 
+[![lint](https://github.com/kdpuvvadi/Nginx-Proxy-Manager-Ansible/workflows/lint/badge.svg?event=push)](https://github.com/kdpuvvadi/Nginx-Proxy-Manager-Ansible/actions?query=workflow%3Alint)
+
+
 You need atleast 2.9 or higher version of ansible. 
 ### Setup
 
