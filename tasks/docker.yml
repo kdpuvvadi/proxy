@@ -1,50 +1,24 @@
 ---
 
-- name: Install Docker GPG apt Key
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
-  when:
-    - ansible_facts.os_family == "Debian"
+- name: if Docker is already installed?.
+  ansible.builtin.command: which docker
+  failed_when: false
+  changed_when: false
+  check_mode: false
+  register: docker_result
 
-- name: Add Docker PPA for Debian
-  apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu bionic stable
-    state: present
-  when:
-    - ansible_facts.os_family == "Debian"
+- name: Download Docker install script.
+  ansible.builtin.get_url:
+    url: https://get.docker.com/
+    dest: /tmp/get-docker.sh
+    mode: 0775
+  when: docker_result.rc == 1
 
-- name: Add docker ppa for redhat family
-  yum_repository:
-    name: docker-ce-stable
-    description: Docker CE Stable Repo
-    baseurl: https://download.docker.com/linux/centos/docker-ce.repo
-  when:
-        - ansible_facts.os_family == "RedHat"
-  
-
-- name: Install Docker-ce debian
-  apt:
-    name: docker-ce
-    update_cache: yes
-    state: latest
-  when:
-    - ansible_facts.os_family == "Debian"
-
-- name: update yum cache for redhat family after docker ppa
-  yum:
-    update_cache: true
-  when:
-    - ansible_facts.os_family == "RedHat"
-
-- name: Install docker on redhat
-  yum:
-    name: 
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
-  when:
-        - ansible_facts.os_family == "RedHat"
+- name: Run Docker install script.
+  ansible.builtin.command: /tmp/get-docker.sh
+  environment:
+    CHANNEL: stable
+  when: docker_result.rc == 1
 
 - name: Start docker
   service:
@@ -57,10 +31,11 @@
     name: docker
     state: present
 
-- name: adding existing user '{{ user }}' to group sudo
+- name: adding existing user '{{ ansible_user }}' to group sudo
   user:
     name: '{{ansible_user}}'
     groups: docker
     append: yes
+
 - name: Reset connection
   meta: reset_connection
