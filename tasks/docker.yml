@@ -35,6 +35,7 @@
     update_cache: true
   when:
     - ansible_facts.os_family == "RedHat"
+    - docker_present.rc == 1
 
 - name: install docker on redhat
   yum:
