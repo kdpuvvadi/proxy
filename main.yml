@@ -8,11 +8,11 @@
 
     - name: apt cache update
       apt:
-        update_cache: true
+        update_cache: yes
         cache_valid_time: 3600
       when:
         - ansible_facts.os_family == "Debian"
-    
+
     - name: apt Upgrade
       apt:
         upgrade: yes
@@ -20,10 +20,10 @@
         - ansible_facts.os_family == "Debian"
 
     - name: yum cache update & upgrade
-      yum: 
+      yum:
         name: "*"
         state: latest
-        update_cache: true
+        update_cache: yes
       when:
         - ansible_facts.os_family == "RedHat"
 
@@ -31,13 +31,13 @@
 
     - name: Install packages/prerequisites
       import_tasks: tasks/packages.yml
-      
+
     - name: Setup Docker.
       import_tasks: tasks/docker.yml
 
     - name: Install Nginx Proxy Manager
       import_tasks: tasks/proxy.yml
-    
+
     - name: install portainer
       import_tasks: tasks/portainer.yml
       when: portainer_enable
