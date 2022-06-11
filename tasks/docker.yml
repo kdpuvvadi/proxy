@@ -12,7 +12,7 @@
     url: https://get.docker.com/
     dest: /tmp/get-docker.sh
     mode: 0775
-  when: 
+  when:
     - docker_present.rc == 1
     - ansible_facts.os_family != "RedHat"
 
@@ -20,19 +20,19 @@
   command: /tmp/get-docker.sh
   environment:
     CHANNEL: stable
-  when: 
+  when:
     - docker_present.rc == 1
     - ansible_facts.os_family != "RedHat"
 
 - name: add docker repo to yum
   command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-  when: 
+  when:
     - docker_present.rc == 1
     - ansible_facts.os_family == "RedHat"
 
 - name: update yum cache
   yum:
-    update_cache: true
+    update_cache: yes
   when:
     - ansible_facts.os_family == "RedHat"
     - docker_present.rc == 1
@@ -40,7 +40,7 @@
 - name: install docker on redhat
   yum:
     name:
-      - docker-ce 
+      - docker-ce
       - docker-ce-cli
       - containerd.io
     state: present

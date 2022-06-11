@@ -3,26 +3,6 @@
   community.docker.docker_network:
     name: "{{ network }}"
 
-- name: mysql/mariadb deploy
-  community.docker.docker_container:
-    name: "{{ mysql_host }}"
-    image: jc21/mariadb-aria:latest
-    ports:
-      - "3306:3306"
-    volumes:
-      - "/data/mysql:/var/lib/mysql" 
-    env:
-      MYSQL_ROOT_PASSWORD: "{{ mysql_root_password }}"
-      MYSQL_DATABASE: "{{ mysql_database }}"
-      MYSQL_USER: "{{ mysql_database }}"
-      MYSQL_PASSWORD: "{{ mysql_password }}"
-    restart_policy: always
-    networks:
-      - name: "{{ network }}"
-    container_default_behavior: compatibility
-    network_mode: "{{ network }}"
-
-
 - name: Nginx Proxy Manager deploy
   community.docker.docker_container:
     name: nginx_proxy
@@ -34,13 +14,7 @@
     volumes:
       - "/data:/data"
       - "/letsencrypt:/etc/letsencrypt"
-    env: 
-      DB_MYSQL_HOST: "{{ mysql_host }}"
-      DB_MYSQL_PORT: "3306"
-      DB_MYSQL_USER: "{{ mysql_user }}"
-      DB_MYSQL_PASSWORD: "{{ mysql_password }}"
-      DB_MYSQL_NAME: "{{ mysql_database }}"
-    restart_policy: always
+    restart_policy: unless-stopped
     networks:
       - name: "{{ network }}"
     network_mode: "{{ network }}"
