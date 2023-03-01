@@ -1,14 +1,14 @@
 ---
 
-- name: if Docker is already installed?.
-  command: which docker
+- name: If Docker is already installed?.
+  ansible.builtin.command: which docker
   failed_when: false
   changed_when: false
   check_mode: false
   register: docker_present
 
 - name: Download Docker install script.
-  get_url:
+  ansible.builtin.get_url:
     url: https://get.docker.com/
     dest: /tmp/get-docker.sh
     mode: 0775
@@ -17,28 +17,34 @@
     - ansible_facts.os_family != "RedHat"
 
 - name: Run Docker install script.
-  command: /tmp/get-docker.sh
+  ansible.builtin.command: /tmp/get-docker.sh
+  failed_when: false
+  changed_when: false
+  check_mode: false
   environment:
     CHANNEL: stable
   when:
     - docker_present.rc == 1
     - ansible_facts.os_family != "RedHat"
 
-- name: add docker repo to yum
-  command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+- name: Add docker repo to yum
+  ansible.builtin.command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  failed_when: false
+  changed_when: false
+  check_mode: false
   when:
     - docker_present.rc == 1
     - ansible_facts.os_family == "RedHat"
 
-- name: update yum cache
-  yum:
-    update_cache: yes
+- name: Update yum cache
+  ansible.builtin.yum:
+    update_cache: true
   when:
     - ansible_facts.os_family == "RedHat"
     - docker_present.rc == 1
 
-- name: install docker on redhat
-  yum:
+- name: Install docker on redhat
+  ansible.builtin.yum:
     name:
       - docker-ce
       - docker-ce-cli
@@ -49,21 +55,21 @@
     - ansible_facts.os_family == "RedHat"
 
 - name: Start docker
-  service:
+  ansible.builtin.service:
     name: docker
     state: started
     enabled: true
 
 - name: Create group docker
-  group:
+  ansible.builtin.group:
     name: docker
     state: present
 
-- name: adding existing user '{{ ansible_user }}' to group sudo
-  user:
+- name: Adding existing user to group sudo
+  ansible.builtin.user:
     name: '{{ ansible_user }}'
     groups: docker
-    append: yes
+    append: true
 
 - name: Reset connection
-  meta: reset_connection
+  ansible.builtin.meta: reset_connection

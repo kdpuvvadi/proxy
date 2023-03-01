@@ -1,7 +1,7 @@
 ---
 
 - name: Install packages/prerequisites "Debian"
-  apt:
+  ansible.builtin.apt:
     name:
       - curl
       - python3-pip
@@ -15,7 +15,7 @@
   when: ansible_facts.os_family == "Debian"
 
 - name: Install packages on redhatfamily
-  yum:
+  ansible.builtin.yum:
     name:
       - curl
       - python3
@@ -31,6 +31,6 @@
     state: present
   when: ansible_facts.os_family == "RedHat"
 
-- name: install python docker SDK
-  pip:
+- name: Install python docker SDK
+  ansible.builtin.pip:
     name: docker

@@ -1,5 +1,5 @@
 ---
-- name: create portainer volume
+- name: Create portainer volume
   community.docker.docker_volume:
     name: "portainer_data"
 
