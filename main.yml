@@ -6,20 +6,20 @@
     - name: Config
       include_vars: vars.yml
 
-    - name: apt cache update
+    - name: Apt cache update
       apt:
         update_cache: true
         cache_valid_time: 3600
       when:
         - ansible_facts.os_family == "Debian"
 
-    - name: apt Upgrade
+    - name: Apt Upgrade
       apt:
         upgrade: true
       when:
         - ansible_facts.os_family == "Debian"
 
-    - name: yum cache update & upgrade
+    - name: Yum cache update & upgrade
       yum:
         name: "*"
         state: latest
@@ -35,9 +35,14 @@
     - name: Setup Docker.
       import_tasks: tasks/docker.yml
 
-    - name: Install Nginx Proxy Manager
+    - name: Install Nginx Proxy Manager with SQLite
       import_tasks: tasks/proxy.yml
+      when: not proxy_with_mysql
 
-    - name: install portainer
+    - name: Install Nginx Proxy Manager with MySQL
+      import_tasks: tasks/proxy-mysql.yml
+      when: proxy_with_mysql
+
+    - name: Install portainer
       import_tasks: tasks/portainer.yml
       when: portainer_enable
