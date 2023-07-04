@@ -10,7 +10,7 @@
     ports:
       - "3306:3306"
     volumes:
-      - "/data/mysql:/var/lib/mysql" 
+      - "/data/mysql:/var/lib/mysql"
     env:
       MYSQL_ROOT_PASSWORD: "{{ mysql_root_password }}"
       MYSQL_DATABASE: "{{ mysql_database }}"
@@ -34,7 +34,7 @@
     volumes:
       - "/data:/data"
       - "/letsencrypt:/etc/letsencrypt"
-    env: 
+    env:
       DB_MYSQL_HOST: "{{ mysql_host }}"
       DB_MYSQL_PORT: "3306"
       DB_MYSQL_USER: "{{ mysql_user }}"
