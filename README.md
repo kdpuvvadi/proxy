@@ -2,10 +2,6 @@
 
 [![lint](https://github.com/kdpuvvadi/proxy/actions/workflows/lint.yml/badge.svg?event=push)](https://github.com/kdpuvvadi/proxy/actions/workflows/lint.yml)
 
-Playbook works on both Debian & Red Hat family hosts. Using Ubuntu 20.04 pc as control node.
-
-You need at least 2.9 or higher version of ansible.
-
 ## Setup
 
 1. Install pip `sudo apt install python3-pip -y`
@@ -38,4 +34,5 @@ Password: changeme
 
 ## Portainer
 
-To install portainer set `portainer_enable` value to `true`.
+To install portainer, set `portainer_enable` value to `true`.
+To install proxy manager with MySQL instead of SQLite, set `proxy_with_mysql` to true

@@ -4,23 +4,23 @@
 
   pre_tasks:
     - name: Config
-      include_vars: vars.yml
+      ansible.builtin.include_vars: vars.yml
 
     - name: Apt cache update
-      apt:
+      ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 3600
       when:
         - ansible_facts.os_family == "Debian"
 
     - name: Apt Upgrade
-      apt:
+      ansible.builtin.apt:
         upgrade: true
       when:
         - ansible_facts.os_family == "Debian"
 
     - name: Yum cache update & upgrade
-      yum:
+      ansible.builtin.yum:
         name: "*"
         state: latest
         update_cache: true
@@ -30,19 +30,19 @@
   tasks:
 
     - name: Install packages/prerequisites
-      import_tasks: tasks/packages.yml
+      ansible.builtin.import_tasks: tasks/packages.yml
 
     - name: Setup Docker.
-      import_tasks: tasks/docker.yml
+      ansible.builtin.import_tasks: tasks/docker.yml
 
     - name: Install Nginx Proxy Manager with SQLite
-      import_tasks: tasks/proxy.yml
+      ansible.builtin.import_tasks: tasks/proxy.yml
       when: not proxy_with_mysql
 
     - name: Install Nginx Proxy Manager with MySQL
-      import_tasks: tasks/proxy-mysql.yml
+      ansible.builtin.import_tasks: tasks/proxy-mysql.yml
       when: proxy_with_mysql
 
     - name: Install portainer
-      import_tasks: tasks/portainer.yml
+      ansible.builtin.import_tasks: tasks/portainer.yml
       when: portainer_enable
